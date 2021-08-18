@@ -64,6 +64,7 @@ class PunctuationCapitalizationModel(NLPModel, Exportable):
             config_dict=OmegaConf.to_container(cfg.language_model.config) if cfg.language_model.config else None,
             checkpoint_file=cfg.language_model.lm_checkpoint,
             vocab_file=self.register_artifact('tokenizer.vocab_file', cfg.tokenizer.vocab_file),
+            model_is_being_restored=self._is_model_being_restored(),
         )
 
         self.punct_classifier = TokenClassifier(

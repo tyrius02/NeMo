@@ -58,6 +58,7 @@ def get_lm_model(
     config_file: Optional[str] = None,
     checkpoint_file: Optional[str] = None,
     vocab_file: Optional[str] = None,
+    model_is_being_restored: Optional[bool] = False,
 ) -> BertModule:
     """
     Helper function to instantiate a language model encoder, either from scratch or a pretrained model.
@@ -71,6 +72,8 @@ def get_lm_model(
         config_file: path to the model configuration file
         checkpoint_file: path to the pretrained model checkpoint
         vocab_file: path to vocab_file to be used with Megatron-LM
+        model_is_being_restored: set to True if the model is being restored
+            (original LM checkpoint file could be missing)
 
     Returns:
         Pretrained BertModule
@@ -103,7 +106,7 @@ def get_lm_model(
         )
 
     if checkpoint_file:
-        if not os.path.exists(checkpoint_file):
+        if not model_is_being_restored and not os.path.exists(checkpoint_file):
             raise ValueError(f'{checkpoint_file} not found')
         model.restore_weights(restore_path=checkpoint_file)
 

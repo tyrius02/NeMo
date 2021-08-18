@@ -70,6 +70,7 @@ class BERTLMModel(ModelPT):
             vocab_file=self.register_artifact('tokenizer.vocab_file', cfg.tokenizer.vocab_file)
             if cfg.tokenizer
             else None,
+            model_is_being_restored=self._is_model_being_restored(),
         )
 
         self.hidden_size = self.bert_model.config.hidden_size

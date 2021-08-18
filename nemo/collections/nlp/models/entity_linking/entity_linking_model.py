@@ -63,6 +63,7 @@ class EntityLinkingModel(NLPModel, Exportable):
             config_file=cfg.language_model.config_file,
             config_dict=cfg.language_model.config,
             checkpoint_file=cfg.language_model.lm_checkpoint,
+            model_is_being_restored=self._is_model_being_restored(),
         )
 
         # Token to use for the self-alignment loss, typically the first token, [CLS]

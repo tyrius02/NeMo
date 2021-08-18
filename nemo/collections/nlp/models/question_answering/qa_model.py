@@ -62,6 +62,7 @@ class QAModel(NLPModel):
             vocab_file=self.register_artifact('tokenizer.vocab_file', cfg.tokenizer.vocab_file)
             if cfg.tokenizer is not None
             else None,
+            model_is_being_restored=self._is_model_being_restored(),
         )
 
         self.classifier = TokenClassifier(

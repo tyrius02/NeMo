@@ -63,6 +63,7 @@ class TextClassificationModel(NLPModel, Exportable):
             config_dict=cfg.language_model.config,
             checkpoint_file=cfg.language_model.lm_checkpoint,
             vocab_file=self.register_artifact('tokenizer.vocab_file', cfg.tokenizer.vocab_file),
+            model_is_being_restored=self._is_model_being_restored(),
         )
 
         self.classifier = SequenceClassifier(
